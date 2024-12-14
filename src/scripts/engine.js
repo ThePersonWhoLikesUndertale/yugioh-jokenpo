@@ -69,14 +69,14 @@ async function createCardImage(idCard, fieldSide) {
     cardImage.classList.add("card");
 
     if (fieldSide === playerSides.player1) {
+        cardImage.addEventListener("mouseover", () => {
+          drawSelectCard(idCard);
+        });
+        
         cardImage.addEventListener("click", () => {
             setCardsField(cardImage.getAttribute("data-id"));
         });
     }
-
-    cardImage.addEventListener("mouseover", () => {
-        drawSelectCard(idCard);
-    });
 
     return cardImage;
 }
