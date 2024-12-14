@@ -52,7 +52,13 @@ const cardData = [
 
 async function getRandomCardId() {
     const randomIndex = Math.floor(Math.random() * cardData.length);
-    return cardData[randomIndex];
+    return randomIndex;
+}
+
+async function drawSelectCard(index) {
+  state.cardSprites.avatar.src = cardData[index].img;
+  state.cardSprites.name.innerText = cardData[index].name;
+  state.cardSprites.type.innerText = `Attribute: ${cardData[index].type}`;
 }
 
 async function createCardImage(idCard, fieldSide) {
