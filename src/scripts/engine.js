@@ -52,7 +52,24 @@ const cardData = [
 
 async function getRandomCardId() {
     const randomIndex = Math.floor(Math.random() * cardData.length);
-    return randomIndex;
+    return cardData[randomIndex].id;
+}
+
+async function setCardsField(cardId) {
+  await removeAllCardsImages();
+
+  let computerCardId = await getRandomCardId();
+
+  state.fieldCards.player.style.display = "block";
+  state.fieldCards.computer.style.display = "block";
+
+  state.fieldCards.player.src = cardData[cardId];
+  state.fieldCards.computer.src = cardData[computerCardId];
+
+  let duelResults = await checkDuelResults(cardId, computerCardId);
+
+  await updateScore();
+  await drawButton(duelResults);
 }
 
 async function drawSelectCard(index) {
@@ -74,7 +91,7 @@ async function createCardImage(idCard, fieldSide) {
         });
         
         cardImage.addEventListener("click", () => {
-            setCardsField(cardImage.getAttribute("data-id"));
+          setCardsField(cardImage.getAttribute("data-id"));
         });
     }
 
